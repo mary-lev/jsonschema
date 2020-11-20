@@ -4,9 +4,9 @@
 
 1. Скачайте репозиторий на свой компьютер.
 2. Установите зависимости:
-pip install requirements.txt
+```pip install requirements.txt```
 3. Запустите скрипт:
-python test.py
+```python test.py```
 4. В файле test.html вас будут ждать результаты валидации.
 
 
