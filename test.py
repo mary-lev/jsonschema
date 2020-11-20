@@ -17,6 +17,7 @@ schemafiles = [os.path.join(schemapath, f) for f in os.listdir(schemapath)]
 """
 schemas = dict()
 for filename in schemafiles:
+	"""Размечаем выданные схемы"""
 	with open(filename, 'r') as f:
 		schema = json.load(f)
 		if 'activity_name' in schema['required']:
@@ -30,6 +31,7 @@ for filename in schemafiles:
 
 
 def choice_schema(data_keys: list) -> list:
+	"""Выбираем схему для каждого файла"""
 	if 'labels' in data_keys:
 		return schemas['labels']
 	elif 'cmarkers' in data_keys:
@@ -40,6 +42,7 @@ def choice_schema(data_keys: list) -> list:
 		return schemas['sleep']
 
 def highlight(row):
+	"""Раскрашиваем строчки таблицы по результатам валидации"""
 	if row.Result == 'ok':
 		return ['background-color: green'] * 4
 	elif row.Result == 'no data':
@@ -48,6 +51,7 @@ def highlight(row):
 		return ['background-color: white'] * 4
 
 def convert_error(error):
+	"""Переводим текст ошибки на человекопонятный язык"""
 	if 'is a required property' in error.message:
 		return "Пропущено обязательное поле"
 	elif 'is not of type' in error.message:
@@ -57,6 +61,7 @@ def convert_error(error):
 		return error.message
 
 def main():
+	"""Валидируем все файлы и собираем результаты"""
 	result = list()
 	for j in jsonfiles:
 		one = dict()
@@ -84,8 +89,11 @@ def main():
 				one = {'File': j, 'Result': 'no data', 'Field': 'all', 'Message': 'Файл пустой'}
 				result.append(one)
 
+	"""Преобразуем результаты валидации в датафрейм"""
 	df = pd.DataFrame.from_records(result)
 	print(df)
+
+	"""Раскрашиваем датафрейм и конвертим в html"""
 	html = df.style.apply(highlight, axis=1).set_caption('<h1>Валидация json</h1>').set_table_attributes(
 					'border="1" class="dataframe table table-hover table-bordered"').render()
 
