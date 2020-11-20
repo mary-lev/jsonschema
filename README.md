@@ -8,6 +8,11 @@ pip install requirements.txt
 3. Запустите скрипт:
 python test.py
 4. В файле test.html вас будут ждать результаты валидации.
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
 |File|Result|Field|Message|
 |---|---|---|---|
 |task_folder/event/1eba2aa1-2acf-460d-91e6-55a8c3e3b7a3.json|error|user|Пропущено обязательное поле|
