@@ -24,7 +24,7 @@
 ```python test.py```
 4. В файле test.html вас будут ждать результаты валидации с цветовой маркировкой.
 
-![Results](test.png)
+![Results](task_folder/test.png)
 
 ## Результаты валидации
 |File|Result|Field|Message|
