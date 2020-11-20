@@ -53,10 +53,13 @@ def highlight(row):
 def convert_error(error):
 	"""Переводим текст ошибки на человекопонятный язык"""
 	if 'is a required property' in error.message:
-		return "Пропущено обязательное поле"
+		return "Пропущено обязательное поле {}".format(error.path[0])
 	elif 'is not of type' in error.message:
 		value = error.message.split(' ')[-1]
-		return "Значение не соответствует типу {}".format(value)
+		return "Значение поля {0} не соответствует типу {1} ({2})".format(
+			error.path[0],
+			value,
+			error.message)
 	else:
 		return error.message
 
@@ -97,7 +100,7 @@ def main():
 	html = df.style.apply(highlight, axis=1).set_caption('<h1>Валидация json</h1>').set_table_attributes(
 					'border="1" class="dataframe table table-hover table-bordered"').render()
 
-	with open('test.html', 'w') as f:
+	with open('test.html', 'w', encoding="utf-8") as f:
 		f.write(html)
 
 if __name__ == "__main__":
