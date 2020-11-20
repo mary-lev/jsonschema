@@ -8,10 +8,7 @@ pip install requirements.txt
 3. Запустите скрипт:
 python test.py
 4. В файле test.html вас будут ждать результаты валидации.
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+
 
 |File|Result|Field|Message|
 |---|---|---|---|
